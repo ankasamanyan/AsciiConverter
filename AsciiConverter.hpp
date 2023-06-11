@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 
-
 class AsciiConverter
 {
 	private:
@@ -19,13 +18,13 @@ class AsciiConverter
 		AsciiConverter();
 		AsciiConverter(std::string stringy);
 		AsciiConverter(const AsciiConverter	 &copy);
-		AsciiConverter	&operator<<(const AsciiConverter &copy);
+		AsciiConverter	&operator=(const AsciiConverter &copy);
 		~AsciiConverter();
 	/* member finctions */
 
 	private:
-		void	set_values(int line);
-
+		int	set_values();
 };
 
+// std::ostream &operator<<(std::ostream out, AsciiConverter const &art);
 #endif

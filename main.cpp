@@ -1,5 +1,5 @@
-#include <iostream>
 #include "AsciiConverter.hpp"
+#include <iostream>
 #include <fstream>
 
 int main()
