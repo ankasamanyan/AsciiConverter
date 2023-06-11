@@ -4,27 +4,37 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
+#include <sstream>
+#include <map>
+#include <iomanip>
 
 class AsciiConverter
 {
 	private:
-		std::string _values;
-		size_t		_columns;
-		size_t		_rows;
-		size_t		_colourCount;
-		size_t		_charsPerPixel;
+		std::string							_values;
+		size_t								_columns;
+		size_t								_rows;
+		size_t								_colourCount;
+		size_t								_charsPerPixel;
+		std::map<std::string, std::string>	_myMap;
+
+
 	public:
-		AsciiConverter();
 		AsciiConverter(std::string stringy);
 		AsciiConverter(const AsciiConverter	 &copy);
 		AsciiConverter	&operator=(const AsciiConverter &copy);
 		~AsciiConverter();
-	/* member finctions */
+		/* member finctions */
+
+
 
 	private:
-		int	set_values();
+		AsciiConverter();
+		int		setValues();
+		int 	hexToInt(const std::string& hex);
+		void	convert(std::ifstream &inputFile);
+		void	fillTheMap(std::ifstream &inputFile);
 };
-
+int hexToInteger(const std::string& hex);
 // std::ostream &operator<<(std::ostream out, AsciiConverter const &art);
 #endif
