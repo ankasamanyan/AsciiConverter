@@ -87,6 +87,7 @@ int AsciiConverter::hexToInt(const std::string &hex)
 
 void	AsciiConverter::convert(std::ifstream &inputFile)
 {
+	std::ofstream outfile("ascii.sh");
 	std::string line;
   	struct RGB rgbColor;
 
@@ -96,21 +97,28 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 		{
 			size_t  ind = 1;
 		    std::string colour;
-		    for (size_t i = 0; i < _columns;i++)
-		    {
-		        colour = (_myMap.find(line.substr(ind, _charsPerPixel)))->second;
+			if (outfile.is_open())
+			{
+				outfile << "echo -e \"";
+			    for (size_t i = 0; i < _columns;i++)
+			    {
+			        colour = (_myMap.find(line.substr(ind, _charsPerPixel)))->second;
 
-				rgbColor = colorConverter(hexToInt(colour));
-				std::string stringy =  "\033[48;2;";
-				stringy.append(std::to_string(rgbColor.r)).append(";");
-				stringy.append(std::to_string(rgbColor.g)).append(";");
-				stringy.append(std::to_string(rgbColor.b)).append("m").append(" ");
-				std::cout << stringy;
-				if (i == _columns - 1)
-					std::cout << RESET_LINE;
-		        ind += _charsPerPixel;
+					rgbColor = colorConverter(hexToInt(colour));
+					std::string stringy =  "\033[48;2;";
+					stringy.append(std::to_string(rgbColor.r)).append(";");
+					stringy.append(std::to_string(rgbColor.g)).append(";");
+					stringy.append(std::to_string(rgbColor.b)).append("m").append("  ");
+					// std::cout << stringy;
+
+						outfile << stringy;
+						if (i == _columns - 1)
+							outfile << "\033[0m\"\n";
+			        ind += _charsPerPixel;
+				}
 			}
 		}
+			outfile.close();
 	}
 }
 
