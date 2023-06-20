@@ -39,8 +39,6 @@ class AsciiConverter
 		void	convert(std::ifstream &inputFile);
 		void	fillTheMap(std::ifstream &inputFile);
 };
- struct RGB	colorConverter(int hexValue);
+struct RGB	colorConverter(int hexValue);
 
-// int hexToInt(std::string& hex);
-// std::ostream &operator<<(std::ostream out, AsciiConverter const &art);
 #endif

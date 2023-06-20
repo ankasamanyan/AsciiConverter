@@ -102,7 +102,9 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 
 				rgbColor = colorConverter(hexToInt(colour));
 				std::string stringy =  "\033[48;2;";
-				stringy.append(std::to_string(rgbColor.r)).append(";").append(std::to_string(rgbColor.g)).append(";").append(std::to_string(rgbColor.b)).append("m").append(" ");
+				stringy.append(std::to_string(rgbColor.r)).append(";");
+				stringy.append(std::to_string(rgbColor.g)).append(";");
+				stringy.append(std::to_string(rgbColor.b)).append("m").append(" ");
 				std::cout << stringy;
 				if (i == _columns - 1)
 					std::cout << RESET_LINE;
@@ -112,36 +114,13 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 	}
 }
 
-// static int	get_colour(struct RGB colour)
-// {
-// 	int	trgb;
-
-// 	trgb = colour.r << 16 | colour.g << 8 | colour.b;
-// 	return (trgb);
-// }
-
  struct RGB colorConverter(int hexValue)
 {
-  struct RGB rgbColor;
+	struct RGB rgbColor;
 
-  rgbColor.r = ((hexValue >> 16) & 0xFF);  // Extract the RR byte
-//   std::cout << RED << "RED: " << rgbColor.r << RESET_LINE;
-  rgbColor.g = ((hexValue >> 8) & 0xFF);   // Extract the GG byte
-//   std::cout << GREEN << "GREEN: " << rgbColor.g << RESET_LINE;
-  rgbColor.b = ((hexValue) & 0xFF);        // Extract the BB byte
-//   std::cout << BLUE << "BLUE: " << rgbColor.b << RESET_LINE;
+	rgbColor.r = ((hexValue >> 16) & 0xFF);  // Extract the RR byte
+	rgbColor.g = ((hexValue >> 8) & 0xFF);   // Extract the GG byte
+	rgbColor.b = ((hexValue) & 0xFF);        // Extract the BB byte
 
-  return rgbColor; 
+	return rgbColor; 
 }
-
-// std::ostream &operator<<(std::ostream out, AsciiConverter const &art)
-// {
-
-// 	out << PURPLE << "Values:           " << GREEN << art._columns << RESET_LINE;
-// 	out << GREEN << std::string(50, '+') << RESET_LINE;
-// 	out << PURPLE << "Rows:             " << GREEN << art._rows << RESET_LINE;
-// 	out << PURPLE << "Columns:          " << GREEN << art._columns << RESET_LINE;
-// 	out << PURPLE << "Colour count:     " << GREEN << art._colourCount << RESET_LINE;
-// 	out << PURPLE << "Chars per pixel:  " << GREEN << art._charsPerPixel << RESET_LINE;
-// 	return (out);
-// }
