@@ -8,6 +8,13 @@
 #include <map>
 #include <iomanip>
 
+typedef struct RGB 
+{
+    int r;
+    int g;
+    int b;
+} RGB;
+
 class AsciiConverter
 {
 	private:
@@ -18,15 +25,12 @@ class AsciiConverter
 		size_t								_charsPerPixel;
 		std::map<std::string, std::string>	_myMap;
 
-
 	public:
 		AsciiConverter(std::string stringy);
 		AsciiConverter(const AsciiConverter	 &copy);
 		AsciiConverter	&operator=(const AsciiConverter &copy);
 		~AsciiConverter();
 		/* member finctions */
-
-
 
 	private:
 		AsciiConverter();
@@ -35,6 +39,8 @@ class AsciiConverter
 		void	convert(std::ifstream &inputFile);
 		void	fillTheMap(std::ifstream &inputFile);
 };
-int hexToInteger(const std::string& hex);
+ struct RGB	colorConverter(int hexValue);
+
+// int hexToInt(std::string& hex);
 // std::ostream &operator<<(std::ostream out, AsciiConverter const &art);
 #endif
