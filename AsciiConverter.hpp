@@ -18,6 +18,7 @@ typedef struct RGB
 class AsciiConverter
 {
 	private:
+		std::string 						_name;
 		std::string							_values;
 		size_t								_columns;
 		size_t								_rows;

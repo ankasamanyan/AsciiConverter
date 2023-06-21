@@ -7,7 +7,8 @@ AsciiConverter::AsciiConverter()
 
 AsciiConverter::AsciiConverter(std::string stringy)
 {
-	std::ifstream	inputFile(stringy);
+	_name = stringy;
+	std::ifstream	inputFile(_name);
 	std::string line;
 
 	if (inputFile.is_open()) 
@@ -87,7 +88,7 @@ int AsciiConverter::hexToInt(const std::string &hex)
 
 void	AsciiConverter::convert(std::ifstream &inputFile)
 {
-	std::ofstream outfile("ascii.sh");
+	std::ofstream outfile(_name.substr(0, _name.size() - 4) + ".sh");
 	std::string line;
   	struct RGB rgbColor;
 
