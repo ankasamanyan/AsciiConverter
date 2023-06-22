@@ -4,6 +4,6 @@
 
 int main()
 {
-	AsciiConverter atrsie("Player.xpm");
+	AsciiConverter atrsie("ghost.xpm");
 	return 0;
 }

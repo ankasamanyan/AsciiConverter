@@ -90,6 +90,7 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 {
 	std::ofstream outfile(_name.substr(0, _name.size() - 4) + ".sh");
 	std::string line;
+    std::string colour;
   	struct RGB rgbColor;
 
 	if (inputFile.is_open()) 
@@ -97,29 +98,25 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 		while (std::getline(inputFile, line) && line.compare("};")) 
 		{
 			size_t  ind = 1;
-		    std::string colour;
 			if (outfile.is_open())
 			{
 				outfile << "echo -e \"";
-			    for (size_t i = 0; i < _columns;i++)
+			    for (size_t i = 0; i < _columns; i++)
 			    {
 			        colour = (_myMap.find(line.substr(ind, _charsPerPixel)))->second;
-
 					rgbColor = colorConverter(hexToInt(colour));
 					std::string stringy =  "\033[48;2;";
 					stringy.append(std::to_string(rgbColor.r)).append(";");
 					stringy.append(std::to_string(rgbColor.g)).append(";");
 					stringy.append(std::to_string(rgbColor.b)).append("m").append("  ");
-					// std::cout << stringy;
-
-						outfile << stringy;
-						if (i == _columns - 1)
-							outfile << "\033[0m\"\n";
+					outfile << stringy;
+					if (i == _columns - 1)
+						outfile << "\033[0m\"\n";
 			        ind += _charsPerPixel;
 				}
 			}
 		}
-			outfile.close();
+		outfile.close();
 	}
 }
 
@@ -127,9 +124,9 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 {
 	struct RGB rgbColor;
 
-	rgbColor.r = ((hexValue >> 16) & 0xFF);  // Extract the RR byte
-	rgbColor.g = ((hexValue >> 8) & 0xFF);   // Extract the GG byte
-	rgbColor.b = ((hexValue) & 0xFF);        // Extract the BB byte
+	rgbColor.r = ((hexValue >> 16) & 0xFF);
+	rgbColor.g = ((hexValue >> 8) & 0xFF);
+	rgbColor.b = ((hexValue) & 0xFF);
 
 	return rgbColor; 
 }
