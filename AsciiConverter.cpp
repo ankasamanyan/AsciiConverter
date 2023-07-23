@@ -125,7 +125,7 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 	}
 }
 
- struct RGB colorConverter(int hexValue)
+struct RGB colorConverter(int hexValue)
 {
 	struct RGB rgbColor;
 
