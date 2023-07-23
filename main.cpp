@@ -2,8 +2,14 @@
 #include <iostream>
 #include <fstream>
 
-int main()
+int main(int argc, char **argv)
 {
-	AsciiConverter atrsie("ghost.xpm");
+	if (argc != 2)
+	{
+		Utils::printMsg("Give the xpm file as argument", ORANGE);
+		return -1;
+	}
+	if (argv[1])
+		AsciiConverter atrsie(argv[1]);
 	return 0;
 }

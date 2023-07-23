@@ -103,13 +103,18 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 				outfile << "echo -e \"";
 			    for (size_t i = 0; i < _columns; i++)
 			    {
-			        colour = (_myMap.find(line.substr(ind, _charsPerPixel)))->second;
-					rgbColor = colorConverter(hexToInt(colour));
-					std::string stringy =  "\033[48;2;";
-					stringy.append(std::to_string(rgbColor.r)).append(";");
-					stringy.append(std::to_string(rgbColor.g)).append(";");
-					stringy.append(std::to_string(rgbColor.b)).append("m").append("  ");
-					outfile << stringy;
+					if(((_myMap.find(line.substr(ind, _charsPerPixel)))->first.compare(" ")) == 0)
+						outfile << RESET << "  ";
+					else
+					{
+						colour = (_myMap.find(line.substr(ind, _charsPerPixel)))->second;
+						rgbColor = colorConverter(hexToInt(colour));
+						std::string stringy =  "\033[48;2;";
+						stringy.append(std::to_string(rgbColor.r)).append(";");
+						stringy.append(std::to_string(rgbColor.g)).append(";");
+						stringy.append(std::to_string(rgbColor.b)).append("m").append("  ");
+						outfile << stringy;
+					}
 					if (i == _columns - 1)
 						outfile << "\033[0m\"\n";
 			        ind += _charsPerPixel;
