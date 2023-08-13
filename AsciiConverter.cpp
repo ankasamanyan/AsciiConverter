@@ -91,6 +91,7 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 	std::ofstream outfile(_name.substr(0, _name.size() - 4) + ".sh");
 	std::string line;
     std::string colour;
+	std::string stringy;
   	struct RGB rgbColor;
 
 	if (inputFile.is_open()) 
@@ -103,18 +104,18 @@ void	AsciiConverter::convert(std::ifstream &inputFile)
 				outfile << "echo -e \"";
 			    for (size_t i = 0; i < _columns; i++)
 			    {
-					if(((_myMap.find(line.substr(ind, _charsPerPixel)))->first.compare(" ")) == 0)
-						outfile << RESET << "  ";
-					else
-					{
-						colour = (_myMap.find(line.substr(ind, _charsPerPixel)))->second;
+				/* 	 */colour = (_myMap.find(line.substr(ind, _charsPerPixel)))->second;
+				/* 	 */if (colour.compare("0x000000") == 0)
+				/* 	 */	stringy = "\033[0m  ";
+				/* 	 */else
+				/* 	 */{
 						rgbColor = colorConverter(hexToInt(colour));
-						std::string stringy =  "\033[48;2;";
+						stringy =  "\033[48;2;";
 						stringy.append(std::to_string(rgbColor.r)).append(";");
 						stringy.append(std::to_string(rgbColor.g)).append(";");
 						stringy.append(std::to_string(rgbColor.b)).append("m").append("  ");
+				/* 	 */}
 						outfile << stringy;
-					}
 					if (i == _columns - 1)
 						outfile << "\033[0m\"\n";
 			        ind += _charsPerPixel;
